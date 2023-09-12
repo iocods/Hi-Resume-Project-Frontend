@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Login into your Account
+        </title>
+        <link rel="stylesheet" href="style/login.css">
+    </head>
+    <body>
+        <div class="account-login-container">
+            <form>
+                <p class="login-paragraph">Login to access your account.</p>
+                <div class="login-credentials-container">
+                    <input type="text" class="js-username username" placeholder="Enter Username">
+                    <input type="password" class="js-password password" placeholder="Enter Password">
+                </div>
+                <div class="js-forgotten-password-container">
+                    <p class="js-forgotten-password forgotten-password"></p>
+                    <p class="js-reset-password reset-password"></p>
+                </div>
+                <div class="button-container">
+                    <button class="login" onclick="validateUser()">Log In</button>
+                    <p>OR</p>
+                    <button class="google-login" type="submit">Login with google</button>
+                    <p>
+                        Don't yet have an account? <a href="simplesignuppage.html">Click here</a> to create one.
+                    </p>
+                </div>
+            </form>
+        </div>
+        <script src="scripts/login.js"></script>
+    </body>
+</html>

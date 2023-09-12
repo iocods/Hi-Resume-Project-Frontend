@@ -1,0 +1,76 @@
+
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+body {
+  margin: 0 !important;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #c4c4c4;
+  color: rgb(20, 21, 26);
+  background: url('../public/background.jpg') no-repeat center center/cover;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+.nav-bar{
+  width: 20vw;
+  display: flex;
+  flex-direction: column;
+}
+.App{
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.root{
+  max-width: 100vw !important;
+  padding: 0;
+  margin: 0;
+}
+.app-container{
+  display: flex;
+  flex-direction: column;
+  max-width: 100% !important;
+  padding: 0;
+}
+
+header{
+  color: #fff;
+  background-color: #333;
+  max-width: 100% !important;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 2rem;
+}
+.container{
+  max-width: 100% !important;
+  padding: 0rem !important;
+  margin: 0rem !important;
+}
+.home-appbar{
+  background-color: none;
+}
+.home-appbar div{
+  background-color: none;
+  display: flex;
+  justify-content: space-between;
+}
+.links-container{
+  display: flex;
+}
+a{
+  text-decoration: none;
+  color: #07e45c;
+  display: block;
+  padding: 0.25rem;
+}

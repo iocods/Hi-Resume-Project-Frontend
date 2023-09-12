@@ -1,0 +1,94 @@
+
+.account-login-container{
+    display: flex;
+    flex-direction: column;
+    width: 600px;
+    align-items: center;
+    height: 600px;
+    border: solid;
+    border-color: rgb(202, 196, 196);
+    border-radius: 10px;
+    border-width: 2px;
+    padding: 10px;
+}
+.login-paragraph{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+    margin-bottom: 50px;
+    font-weight: bold;
+    font-size: 20px;
+    color: blue;
+}
+.login-credentials-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+.username, .password{
+    width: 300px;
+    padding: 15px;
+    margin-bottom: 20px;
+    font-size: 18px;
+}
+.password::placeholder, .username::placeholder{
+    font-size: 13px;
+}
+.button-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.login{
+    padding: 15px;
+    color: white;
+    background-color: rgb(32, 8, 139);
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: Arial;
+    font-size: 15px; 
+    transition: background-color 1s, opacity 1s;
+}
+.google-login{
+    padding: 15px;
+    color: white;
+    background-color: rgb(11, 185, 49);
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: Arial;
+    font-size: 15px;
+    transition: opacity 1s, background-color 1s, padding 1s;
+    font-weight: bold;
+}
+.google-login:hover, .login:hover{
+    opacity: 0.8;
+}
+.login:active{
+    background-color: white;
+    color: rgb(32, 8, 139);
+    border: solid;
+    padding: 14px;
+    border-color: rgb(32, 8, 139);
+    border-width: 2px;
+}
+.google-login:active{
+    color: rgb(11, 185, 49);
+    background-color: white;
+    border: solid;
+    border-color: rgb(11, 185, 49);
+    /* padding-top: 15px;
+    padding-bottom: 15px; */
+    padding-right: 17px;
+    padding-left: 17px;
+    border-width: 2px;
+}
+.forgotten-password-container{
+    display: flex;
+}
+.reset-password{
+    color: red;
+}
