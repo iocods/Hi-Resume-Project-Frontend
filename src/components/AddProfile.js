@@ -1,4 +1,4 @@
-import React from "react";
+import {React, useEffect} from "react";
 import { useStoreActions, useStoreState } from "easy-peasy";
 import {DialogContent, Dialog, DialogTitle, DialogActions, Button, TextField} from '@mui/material';
 import { Navigate } from "react-router-dom";
@@ -10,6 +10,9 @@ const AddProfile = () => {
     const token = useStoreState(state => state.userHeader);
     const newProfile = useStoreState(state => state.newProfile);
     const setNewProfile = useStoreActions(actions => actions.setNewProfile);
+    useEffect(() => {
+
+    }, []);
     const handleClose = () => {
         setOpen(false);
     }
@@ -33,14 +36,12 @@ const AddProfile = () => {
         }
     }
   return <main>
-    {console.log(token.Authorization)}
     <Button
         onClick={handleOpen}
     >
         Add a new profile.
     </Button>
     <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Enter Resume Title</DialogTitle>
         <DialogContent>
             <p>Please provide a title that resonates well with the job you're applying for</p>
             <TextField

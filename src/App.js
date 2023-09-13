@@ -5,16 +5,22 @@ import SignUp from "./components/SignUp";
 import Login from "./components/Login";
 import Home from "./components/Home";
 import Address from "./components/Address";
-import { useStoreState } from "easy-peasy";
+import { useStoreActions, useStoreState } from "easy-peasy";
 import {AppBar, Typography, Toolbar, Container, Button} from "@mui/material";
+import {Dialog, DialogTitle, DialogActions, DialogContent} from "@mui/material";
 
 const App = () => {
-  const navigate = useNavigate();
-  useEffect(() => {
-    navigate("/home", {replace: true});
-  }, [])
   const user = useStoreState(states => states.userLogin);
-  return( 
+  const setUser = useStoreActions(actions => actions.setUserLogin);
+  const open = useStoreState(state => state.logout);
+  const setOpen = useStoreActions(actions => actions.setLogout);
+  const navigate = useNavigate();
+  const logout = () => {
+    setUser({...user, username: '', password: '', authorized: false});
+    sessionStorage.removeItem('jwt');
+    navigate("/login", {replace: true});
+  }
+    return( 
         <div>
         <header>
             <Link to={"/home"}>
@@ -23,11 +29,16 @@ const App = () => {
                 </Typography>
             </Link>
             <div className="links-container">
-                {console.log(user.authorized)}
                 <Link className="links" to="/login">Resumes</Link>
                 <Link className="links" to="/login">Curriculum Vitae</Link>
                 <Link className="links" to="/login">Cover Letters</Link>
-                {user.authorized === true ? <Link to="/login">Logout</Link> : <Link className="links" to="/login">Login</Link>}
+                {sessionStorage.getItem('jwt') ? 
+                <Button
+                  onClick={logout}
+                >
+                  Logout
+                </Button>:
+                <Link className="links" to="/login">Login</Link>}
             </div>
         </header>
           <Routes>

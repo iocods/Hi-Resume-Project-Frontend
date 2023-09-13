@@ -56,5 +56,7 @@ export default createStore({
     },
     setNewProfile: action((state, payload) => {
         state.newProfile = payload;
-    })
+    }),
+    logout: false,
+    setLogout: action((state, payload) => state.logout = payload)
 })

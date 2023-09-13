@@ -1,4 +1,4 @@
-import React from "react";
+import {React, useEffect} from "react";
 import {useNavigate} from 'react-router-dom';
 import {TextField, DialogContent, Container, Button, autocompleteClasses} from '@mui/material';
 import { useStoreActions, useStoreState } from "easy-peasy";
@@ -12,6 +12,9 @@ const Login = () => {
     const headers = useStoreState(states => states.userHeader);
     const setHeader = useStoreActions(actions => actions.setUserHeader);
     const formStyle = useStoreState(states => states.style);
+    useEffect(() => {
+
+    }, [])
     const authUser = async (userDetails) => {
         let response = null;
         const requestObject = {
