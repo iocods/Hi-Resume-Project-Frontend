@@ -3,11 +3,13 @@ import {Routes, Route, useNavigate, Link} from "react-router-dom";
 import UserRegistration from "./components/UserRegistration";
 import SignUp from "./components/SignUp";
 import Login from "./components/Login";
+import Resume from "./components/Resume";
 import Home from "./components/Home";
 import Address from "./components/Address";
 import { useStoreActions, useStoreState } from "easy-peasy";
 import {AppBar, Typography, Toolbar, Container, Button} from "@mui/material";
 import {Dialog, DialogTitle, DialogActions, DialogContent} from "@mui/material";
+import Cv from "./components/Cv";
 
 const App = () => {
   const user = useStoreState(states => states.userLogin);
@@ -29,8 +31,8 @@ const App = () => {
                 </Typography>
             </Link>
             <div className="links-container">
-                <Link className="links" to="/login">Resumes</Link>
-                <Link className="links" to="/login">Curriculum Vitae</Link>
+                <Link className="links" to="/resume">Resumes</Link>
+                <Link className="links" to="/cv">Curriculum Vitae</Link>
                 <Link className="links" to="/login">Cover Letters</Link>
                 {sessionStorage.getItem('jwt') ? 
                 <Button
@@ -44,7 +46,9 @@ const App = () => {
           <Routes>
             <Route exact path='/register' element={<UserRegistration/>} />
             <Route exact path='/home' element={<Home />} />
-            <Route exact path='/address' element={<Address />} /> 
+            <Route exact path="/resume" element={<Resume />} />
+            <Route exact path="/cv" element={<Cv />} />
+            <Route exact path='/:type/:title/address' element={<Address />} /> 
           </Routes>
         </div>
     );

@@ -1,15 +1,17 @@
 import {React, useEffect} from "react";
 import { useStoreActions, useStoreState } from "easy-peasy";
 import {DialogContent, Dialog, DialogTitle, DialogActions, Button, TextField} from '@mui/material';
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-const AddProfile = () => {
+const AddProfile = ({ type }) => {
     const PROFILE_URL = 'http://localhost:8080/resume/my-profile';
     const open = useStoreState(state => state.open);
     const setOpen = useStoreActions(actions => actions.setOpen);
     const token = useStoreState(state => state.userHeader);
     const newProfile = useStoreState(state => state.newProfile);
     const setNewProfile = useStoreActions(actions => actions.setNewProfile);
+    const Navigate = useNavigate();
+    const setTitle = useStoreActions(actions => actions.setTitle);
     useEffect(() => {
 
     }, []);
@@ -20,6 +22,9 @@ const AddProfile = () => {
         setOpen(true);
     }
     const addProfile = async () => {
+        console.log(JSON.stringify(newProfile));
+        const profile = newProfile;
+        setNewProfile({...newProfile, type: '', skills: [], languages: [], title: ''})
         try{
             const response = await fetch(PROFILE_URL, {
                 method: 'POST',
@@ -27,12 +32,14 @@ const AddProfile = () => {
                     'Content-Type': 'application/json',
                     'Authorization': token.Authorization
                 },
-                body: JSON.stringify(newProfile)
+                body: JSON.stringify(profile)
             })
             console.log(`Response Details:  ${response}`)
-            if(!response.ok) Navigate('/login', {replace: true});
         } catch(error){
             console.log(error.message);
+        } finally{
+            setTitle(profile.title);
+            Navigate(`${profile.title}/address`);
         }
     }
   return <main>
@@ -55,7 +62,7 @@ const AddProfile = () => {
                 value={newProfile.title}
                 color="primary"
                 onChange={(e) => {
-                    setNewProfile({...newProfile, [e.target.name]: e.target.value});
+                    setNewProfile({...newProfile, [e.target.name]: e.target.value, type: type});
                 }}
             ></TextField>
         </DialogContent>
@@ -63,7 +70,11 @@ const AddProfile = () => {
             <Button onClick={handleClose}> 
                 Cancel
             </Button>
-            <Button onClick={addProfile}> 
+            <Button onClick={() => {
+                const resumeTitle = newProfile.title;
+                addProfile();
+                Navigate(`${resumeTitle}/address`);
+            }}> 
                 Add
             </Button>
         </DialogActions>

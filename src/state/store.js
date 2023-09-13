@@ -49,6 +49,8 @@ export default createStore({
     setOpen: action((state, payload) => {
         state.open = payload;
     }),
+    title: '',
+    setTitle: action((state, payload) => state.title = payload),
     newProfile: {
         title: '',
         language: [],
