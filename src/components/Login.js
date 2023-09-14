@@ -27,12 +27,10 @@ const Login = () => {
         try{
             response = await fetch(AUTH_URL, requestObject);
             if(!response.ok) throw Error("Invalid Username or Password");
-            console.log(response);
             const jwtToken = response.headers.get('Authorization');
             if (!jwtToken) throw Error("Token not found in header");
 
             sessionStorage.setItem("jwt", jwtToken);
-            console.log(`Jwt is {jwtToken}`);
             setUser({...user, password: '', authorized: true});
             setHeader({...headers, Authorization: jwtToken});
             navigate('/home', {replace: true});
@@ -47,7 +45,6 @@ const Login = () => {
             onSubmit={(e) => e.preventDefault()}
             style={formStyle}
         >
-            {console.log(sessionStorage.getItem('jwt'))}
             <p className="login-paragraph">Login to access your account.</p>
             <div className="login-credentials-container">
                 <TextField
@@ -60,6 +57,7 @@ const Login = () => {
                     name='username'
                     value={user.username}
                     color="primary"
+                    autoComplete="username"
                     onChange={(e) => {
                         setUser({...user, [e.target.name]: e.target.value});
                     }}
@@ -75,6 +73,7 @@ const Login = () => {
                     name='password'
                     value={user.password}
                     color="primary"
+                    autoComplete="current-password"
                     onChange={(e) => {
                         setUser({...user, [e.target.name]: e.target.value});
                     }}
@@ -90,12 +89,7 @@ const Login = () => {
                         style={{flex: 1, padding: 15, backgroundColor: "45deg #fa325a #19faa3"}}
                         type='submit'
                         onClick={async () => {
-                            console.log(`Before Authentication`)
-                            console.log(JSON.stringify(user));
                             await authUser(user);
-                            console.log(`After Authentication`)
-                            user.authorized &&
-                            console.log(JSON.stringify(user));
                         }
                     }>
                         Login
@@ -103,7 +97,7 @@ const Login = () => {
                 <p>OR</p>
                 <button className="google-login" type="submit">Login with google</button>
                 <p>
-                    Don't yet have an account? <a href="simplesignuppage.html">Click here</a> to create one.
+                    Don't yet have an account? <Link to={"/signup"}>Click here</Link> to create one.
                 </p>
                 <Link to="/home">Go Home</Link>
             </div>

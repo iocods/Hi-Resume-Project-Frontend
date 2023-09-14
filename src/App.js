@@ -46,9 +46,8 @@ const App = () => {
           <Routes>
             <Route exact path='/register' element={<UserRegistration/>} />
             <Route exact path='/home' element={<Home />} />
-            <Route exact path="/resume" element={<Resume />} />
-            <Route exact path="/cv" element={<Cv />} />
-            <Route exact path='/:type/:title/address' element={<Address />} /> 
+            <Route exact path="/resume/*" element={<Resume />} />
+            <Route exact path="/cv/*" element={<Cv />} />
           </Routes>
         </div>
     );

@@ -34,7 +34,7 @@ export default createStore({
     },
     address: {
         suiteNumber: '',
-        streetName: '',
+        street: '',
         city: '',
         state: '',
         postalCode: '',

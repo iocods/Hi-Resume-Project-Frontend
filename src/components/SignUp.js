@@ -2,6 +2,7 @@ import React from "react";
 import {TextField, DialogContent, Container, Button, autocompleteClasses} from '@mui/material';
 import { useStoreActions, useStoreState } from 'easy-peasy';
 import { useState } from 'react';
+import {Link} from 'react-router-dom';
 
 const SignUp = () => {
     const setUser = useStoreActions(actions => actions.setUser); 
@@ -38,19 +39,6 @@ const SignUp = () => {
                             label='Firstname'
                             name='firstname'
                             value={user.firstname}
-                            color="primary"
-                            onChange={(e) => {
-                                setUser({...user, [e.target.name]: e.target.value});
-                                
-                            }}
-                        >
-                        </TextField>
-                        <TextField
-                            required={true}
-                            style={{width: 200, margin: 10}}
-                            label='MiddleName'
-                            name='middlename'
-                            value={user.middlename}
                             color="primary"
                             onChange={(e) => {
                                 setUser({...user, [e.target.name]: e.target.value});
@@ -149,7 +137,7 @@ const SignUp = () => {
                         <p>OR</p>
                         <button className="google-sign-up" type="submit">Sign up with google</button>
                         <p>
-                            Already have an account? <a href="login.html">Click here</a> to login
+                            Already have an account? <Link to="/login">Click here</Link> to login
                         </p>
                     </div>
                 </div>

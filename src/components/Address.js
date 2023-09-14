@@ -1,29 +1,37 @@
-import React from "react";
+import {React, useEffect}from "react";
 import { TextField, Button } from "@mui/material";
 import {useStoreState, useStoreActions} from 'easy-peasy';
+import { useNavigate } from "react-router-dom";
 
-const Address = () => {
+
+const Address = ({title, setIsCreated, Navigate}) => {
     const address = useStoreState(states => states.address);
     const setAddress = useStoreActions(actions => actions.setAddress);
     const formStyle = useStoreState(states => states.style);
     const token = useStoreState(states => states.userHeader);
-    const AUTH_URL = 'http://localhost:8080/resume/profile/'
-    const saveAddress = async (addressDetails) => {
+    console.log(`Title found in state is ${title}`);
+    const AUTH_URL = `http://localhost:8080/resume/my-profile/${title}/address`;
+    useEffect(() => {}, []);
+    const saveAddress = async () => {
         let response = null;
         const requestObject = {
             method: 'POST',
-            body: JSON.stringify(addressDetails),
+            body: JSON.stringify(address),
             headers: {'Content-Type': 'application/json',
-                      'Authorization': token
+                      'Authorization': sessionStorage.getItem('jwt')
                     }
         }
         try{
             response = await fetch(AUTH_URL, requestObject);
             if(!response.ok) throw Error("Invalid Username or Password");
             console.log(response);
+
         }
         catch(error){
             console.log(error.message);
+        }
+        finally{
+            Navigate(`${title}/workhistory`, {replace: true});
         }
     }
   return <form onSubmit={(e) => e.preventDefault()} className="user-details" style={formStyle}>
@@ -52,7 +60,7 @@ const Address = () => {
                 height: '8px'
             }}}
             name='streetName'
-            value={address.streetName}
+            value={address.street}
             color="primary"
             onChange={(e) => {
                 setAddress({...address, [e.target.name]: e.target.value});
@@ -116,11 +124,16 @@ const Address = () => {
                 setAddress({...address, [e.target.name]: e.target.value});
             }}
         ></TextField>
-        <Button
-            onClick={() => saveAddress()}
-        > 
-            Save
-        </Button>
+        <div>
+            <Button>
+                Prev
+            </Button>
+            <Button
+                onClick={saveAddress}
+            > 
+                Next
+            </Button>
+        </div>
     </div>
   </form>;
 };
