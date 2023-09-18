@@ -2,6 +2,7 @@ import {React, useEffect} from "react";
 import { TextField, Button } from "@mui/material";
 import { useStoreActions, useStoreState } from "easy-peasy";
 import { useNavigate } from "react-router-dom";
+import { AgInputTextField } from "ag-grid-community";
 
 const PersonalInfo = ({setCurrentCategory, setCurrentIndex}) => {
   const personalDetails = useStoreState(state => state.personalDetails);
@@ -16,42 +17,26 @@ const PersonalInfo = ({setCurrentCategory, setCurrentIndex}) => {
         <TextField
             required={true}
             style={{width: "90%", margin: 10}}
-            label='Suite No'
-            inputProps={{style: {
-              height: '8px'
-            }}}
-            name='suiteNumber'
-            type="number"
-            value={personalDetails.suiteNumber}
-            color="primary"
-            onChange={(e) => {
-              setPersonalDetails({...personalDetails, [e.target.name]: e.target.value});
-            }}
-        ></TextField>
-        <TextField
-            required={true}
-            style={{width: "90%", margin: 10}}
             type="text"
-            label='personalDetails'
+            label='Firstname'
             inputProps={{style: {
               height: '8px'
             }}}
-            name='streetName'
-            value={personalDetails.street}
+            name='firstname'
+            value={personalDetails.firstname}
             color="primary"
             onChange={(e) => {
               setPersonalDetails({...personalDetails, [e.target.name]: e.target.value});
             }}
         ></TextField>
         <TextField
-            required={true}
             style={{width: "90%", margin: 10}}
-            label='City'
+            label='Middle Name'
             inputProps={{style: {
                 height: '8px'
             }}}
-            name='city'
-            value={personalDetails.city}
+            name='middleName'
+            value={personalDetails.middleName}
             color="primary"
             onChange={(e) => {
                 setPersonalDetails({...personalDetails, [e.target.name]: e.target.value});
@@ -61,41 +46,40 @@ const PersonalInfo = ({setCurrentCategory, setCurrentIndex}) => {
             required={true}
             style={{width: "90%", margin: 10}}
             type="text"
-            label='State'
+            label='Lastname'
+            inputProps={{style: {
+              height: '8px'
+            }}}
+            name='lastname'
+            value={personalDetails.lastname}
+            color="primary"
+            onChange={(e) => {
+              setPersonalDetails({...personalDetails, [e.target.name]: e.target.value});
+            }}
+        ></TextField>
+        <TextField
+            required={true}
+            style={{width: "90%", margin: 10}}
+            type="email"
+            label='Email Address'
             inputProps={{style: {
                 height: '8px'
             }}}
             name='state'
-            value={personalDetails.state}
+            value={personalDetails.email}
             color="primary"
             onChange={(e) => {
                 setPersonalDetails({...personalDetails, [e.target.name]: e.target.value});
             }}
         ></TextField>
         <TextField
-            required={true}
             style={{width: "90%", margin: 10}}
-            label='Postal Code'
+            label='Linkedln Profile'
             inputProps={{style: {
                 height: '8px'
             }}}
-            name='postalCode'
-            value={personalDetails.postalCode}
-            color="primary"
-            onChange={(e) => {
-              setPersonalDetails({...personalDetails, [e.target.name]: e.target.value});
-            }}
-        ></TextField>
-        <TextField
-            required={true}
-            style={{width: "90%", margin: 10}}
-            type="text"
-            label='Country'
-            inputProps={{style: {
-              height: '8px'
-            }}}
-            name='country'
-            value={personalDetails.country}
+            name='linkedln'
+            value={personalDetails.linkedln}
             color="primary"
             onChange={(e) => {
               setPersonalDetails({...personalDetails, [e.target.name]: e.target.value});
