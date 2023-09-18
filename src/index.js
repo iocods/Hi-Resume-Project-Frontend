@@ -12,7 +12,7 @@ import UserRegistration from './components/UserRegistration';
 import SignUp from './components/SignUp'
 import Login from './components/Login'
 import Home from './components/Home'
-import Address from './components/Address'
+import Address from './resume_components/Address'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

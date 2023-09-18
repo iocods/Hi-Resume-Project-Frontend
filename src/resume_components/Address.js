@@ -4,14 +4,18 @@ import {useStoreState, useStoreActions} from 'easy-peasy';
 import { useNavigate } from "react-router-dom";
 
 
-const Address = ({title, setIsCreated, Navigate}) => {
+const Address = ({title, setIsCreated, setCurrentCategory, setCurrentIndex}) => {
     const address = useStoreState(states => states.address);
     const setAddress = useStoreActions(actions => actions.setAddress);
     const formStyle = useStoreState(states => states.style);
     const token = useStoreState(states => states.userHeader);
     console.log(`Title found in state is ${title}`);
     const AUTH_URL = `http://localhost:8080/resume/my-profile/${title}/address`;
-    useEffect(() => {}, []);
+    const Navigate = useNavigate();
+    useEffect(() => {
+        setCurrentCategory("Current Address");
+        setCurrentIndex(1);
+    }, []);
     const saveAddress = async () => {
         let response = null;
         const requestObject = {
@@ -31,11 +35,11 @@ const Address = ({title, setIsCreated, Navigate}) => {
             console.log(error.message);
         }
         finally{
-            Navigate(`${title}/workhistory`, {replace: true});
+            Navigate(`/resume/education`, {replace: true});
         }
     }
-  return <form onSubmit={(e) => e.preventDefault()} className="user-details" style={formStyle}>
-  <div className="login-credentials-container">
+  return <form onSubmit={(e) => e.preventDefault()}>
+  <div>
         <TextField
             required={true}
             style={{width: "90%", margin: 10}}
@@ -59,7 +63,7 @@ const Address = ({title, setIsCreated, Navigate}) => {
             inputProps={{style: {
                 height: '8px'
             }}}
-            name='streetName'
+            name='street'
             value={address.street}
             color="primary"
             onChange={(e) => {
@@ -125,7 +129,8 @@ const Address = ({title, setIsCreated, Navigate}) => {
             }}
         ></TextField>
         <div>
-            <Button>
+            <Button
+                onClick={() => Navigate('/resume/personal', {replace: true})}>
                 Prev
             </Button>
             <Button

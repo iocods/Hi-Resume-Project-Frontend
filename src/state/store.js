@@ -9,9 +9,11 @@ export default createStore({
         dob: '',
         tel: ''
     },
+
     setUser: action((state, payload) => {
         state.user = payload;
     }),
+
     userLogin: {
         username: '',
         password: '',
@@ -26,12 +28,6 @@ export default createStore({
     setUserHeader: action((state, payload) => {
         state.userHeader = payload;
     }),
-    style: {
-        backgroundColor: '#fff',
-        marginTop: '9rem',
-        marginLeft: '2rem',
-        maxWidth: '400px'
-    },
     address: {
         suiteNumber: '',
         street: '',
@@ -60,5 +56,32 @@ export default createStore({
         state.newProfile = payload;
     }),
     logout: false,
-    setLogout: action((state, payload) => state.logout = payload)
+    setLogout: action((state, payload) => state.logout = payload), 
+    workHistory: {
+        companyName: '',
+        startDate: '',
+        endDate: '',
+        role: '',
+        roleDescription: ''
+    },
+    setWorkHistory: action((state, payload) => state.workHistory = payload),
+    // newEducationDetails: {
+    //     startDate: 'Enter Start Year',
+    //     endDate: '',
+    //     nameOfSchool: '',
+    //     courseOfStudy: '',
+    //     degreeType: ''
+    // },
+    // setNewEducationDetails: action((state, payload) => state.newEducationDetails = payload),
+    education: [],
+    setEducation: action((state, payload) => state.education = payload),
+    personalDetails: {},
+    setPersonalDetails: action((state, payload) => state.personalDetails = payload),
+    skills: [],
+    setSkills: action((state, payload) => state.skills = payload),
+    reference: {
+        referenceName: '',
+        referencerRole: ''
+    },
+    setReference: action((state, payload) => state.reference = payload)
 })
