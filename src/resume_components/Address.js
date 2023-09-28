@@ -134,7 +134,7 @@ const Address = ({title, setIsCreated, setCurrentCategory, setCurrentIndex}) => 
                 Prev
             </Button>
             <Button
-                onClick={saveAddress}
+                onClick={() => Navigate(`/resume/education`, {replace: true})}
             > 
                 Next
             </Button>

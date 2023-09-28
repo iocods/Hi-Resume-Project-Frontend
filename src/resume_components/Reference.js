@@ -3,11 +3,12 @@ import { TextField, Button } from "@mui/material";
 import DataContext from "../context/DataContext";
 
 const Reference = ({setCurrentCategory, setCurrentIndex}) => {
-  const{reference, setReference, newReference, setNewReference, Navigate} = useContext(DataContext);
+  const{reference, setReference, newReference, setNewReference, Navigate, onCreateFinish, resume, addReferee, setResume} = useContext(DataContext);
   useEffect(() => {
     setCurrentIndex(5);
     setCurrentCategory('Reference');
-  }, [])
+    console.log(JSON.stringify(resume));
+  }, [resume])
   return <form onSubmit={(e) => e.preventDefault()}>
   <div>
         <TextField
@@ -85,6 +86,7 @@ const Reference = ({setCurrentCategory, setCurrentIndex}) => {
                   setNewReference({...newReference, [e.target.name]: e.target.value});
               }}
           ></TextField>
+          {reference && reference.map((r, index) => <p key={index}>{r.fullname}</p>)}
         </div>
         <div>
             <Button
@@ -92,8 +94,14 @@ const Reference = ({setCurrentCategory, setCurrentIndex}) => {
               Prev
             </Button>
             <Button
+              onClick={onCreateFinish}
             > 
               Finish
+            </Button>
+            <Button
+                onClick={addReferee}
+            >
+                Add Referee.
             </Button>
         </div>
     </div>

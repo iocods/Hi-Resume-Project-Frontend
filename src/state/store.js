@@ -82,6 +82,5 @@ export default createStore({
     reference: {
         referenceName: '',
         referencerRole: ''
-    },
-    setReference: action((state, payload) => state.reference = payload)
+    }
 })

@@ -1,49 +1,56 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useContext} from "react";
 import { Route, Link } from "react-router-dom";
-import { useStoreState, useStoreActions } from "easy-peasy";
+import { useStoreState } from "easy-peasy";
 import AddProfile from './AddProfile';
-import { Typography, Button } from "@mui/material";
+import { Typography } from "@mui/material";
 import IconContainer from './IconContainer';
-
-
+import DataContext from '../context/DataContext';
+import Template from "../resume_components/Template";
+import Container from "./Container";
+import ClientFeedback from "./ClientFeedback";
+import About from "./About";
+import imageOne from '../resume_templates/Resume_1.jpg';
+import imageTwo from '../resume_templates/Resume_2.jpg';
+import imageThree from '../resume_templates/Resume_3.jpg';
+import imageFour from '../resume_templates/Resume_4.jpg';
+import Footer from "./Footer";
 const Home = () => {
+    const templateImageOne = [
+        imageOne,
+        imageTwo,
+        imageThree,
+        imageFour
+    ]
     const user = useStoreState(state => state.userLogin);
     const resumeType = "RESUME";
+    const {setDropDownFalse} = useContext(DataContext);
+    useEffect(() => (setDropDownFalse), []);
 
   return <>
-        <section className="home-top-section">
-            <div className="home-text-container">
-                <Typography variant="h2" style={{color: '#0011ff', margin:"2rem 0rem"}}>
-                    Get Hired Today
-                </Typography>
-                <p>
-                    Are You Tired Of Applying For Openings Without Getting any Response?
-                    Put A Halt To That Today With Our Properly Built AI Resumes CV's and Cover Letter.
-                </p>
-                <div>
-                    <Link className="button">
-                        Create CV
-                    </Link>
-                    <Link className="button">
-                        Create Resume
-                    </Link>
-                </div>
+        <section className="home-top-section" onClick={setDropDownFalse}>
+            <div className="image-container">
+                
             </div>
-            <div className="parent-img-container">
+            <div className="home-text-container">
+                <h1>
+                    GET THE PERFECT RESUME FOR THAT JOB APPLICATION
+                    BUILD YOUR CV WITH HI-RESUME CREATOR
+                </h1>
+                <button className="login-links">Create Resume</button>
             </div>
         </section>
         <section className="home-bottom-section">
             <div>
-                <p>Show them that you've got what it takes to take their Company to the next level</p>
-            </div>
-            <div>
-
+                <p className="medium-font">Show them that you've got what it takes to take their Company to the next level</p>
+                <p className="medium-font">Select a template from the list of given templates below and start creating your Resume!</p>
             </div>
         </section>
-        <AddProfile 
-           type={resumeType}
-        />
+        <Container type={"Cv Template"} template={templateImageOne}/>
+        <Container type={"Resume Template"} template={templateImageOne}/>
+        <Container type={"Cover Letter Template"} template={templateImageOne}/>
         <IconContainer />
+        <ClientFeedback />
+        <About />
     </>;
 };
 

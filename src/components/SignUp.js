@@ -3,11 +3,13 @@ import {TextField, DialogContent, Container, Button, autocompleteClasses} from '
 import { useStoreActions, useStoreState } from 'easy-peasy';
 import { useState } from 'react';
 import {Link} from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
     const setUser = useStoreActions(actions => actions.setUser); 
     const user = useStoreState(states => states.user);
     const [confirmPassword, setConfirmPassword] = useState('');
+    const navigate = useNavigate();
     const containerStyle = {
         maxWidth: 600,
         margin: "auto",
@@ -126,11 +128,20 @@ const SignUp = () => {
                             color='secondary'
                             style={{flex: 1, padding: 15, backgroundColor: "45deg #fa325a #19faa3"}}
                             type='submit'
-                            onClick={() => {
+                            onClick={ async () => {
                                 console.log(user);
                                 console.log(JSON.stringify(user));
-                                fetch(REG_URL, requestObject);
-                        }}
+                                try{
+                                    await fetch(REG_URL, requestObject);
+                                }
+                                catch(error){
+                                    console.log(error.message);
+                                }
+                                finally{
+                                    navigate('/', {replace: true});
+                                }
+                            }
+                        }
                         >
                             Sign up
                         </Button>

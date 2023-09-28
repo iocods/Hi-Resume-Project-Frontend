@@ -1,31 +1,36 @@
 import React from "react";
-import {FaPlus} from 'react-icons/fa';
+import {FaPlus, FaRobot, FaCrown, FaFolder} from 'react-icons/fa';
+import Multiple from "../custom_icons/Multiple";
+import OpenAi from "../custom_icons/OpenAi";
+import Freemium from "../custom_icons/Freemium";
 
 const IconContainer = () => {
+    const iconStyle = {
+      fontSize: '64px',
+      color: 'blue'
+    };
+  
   return <section className="icon-section">
-    <div className="icon-container">
-        <div className="icon-box">
-            <FaPlus />
+    <h1>Why Hi-Resume</h1>
+    <div className="icon-wrapper">
+        <div className="icon-container">
+            <div>
+                <Multiple />
+            </div>
+            <p>Multiple Templates</p>
         </div>
-        <p>
-            Icon Container 1.
-        </p>
-    </div>
-    <div className="icon-container">
-        <div className="icon-box">
-            <FaPlus />
+        <div className="icon-container">
+            <div>
+                <OpenAi />
+            </div>
+            <p>Open AI Integration</p>
         </div>
-        <p>
-            Icon Container 2.
-        </p>
-    </div>
-    <div className="icon-container">
-        <div className="icon-box">
-            <FaPlus />
+        <div className="icon-container">
+            <div>
+                <Freemium />
+            </div>
+            <p>Freemium and Premium</p>
         </div>
-        <p>
-            Icon Container 3.
-        </p>
     </div>
   </section>;
 };

@@ -1,13 +1,10 @@
-import {React, useEffect} from "react";
+import {React, useEffect, useContext} from "react";
 import { TextField, Button } from "@mui/material";
-import { useStoreActions, useStoreState } from "easy-peasy";
 import { useNavigate } from "react-router-dom";
-import { AgInputTextField } from "ag-grid-community";
+import DataContext from "../context/DataContext";
 
 const PersonalInfo = ({setCurrentCategory, setCurrentIndex}) => {
-  const personalDetails = useStoreState(state => state.personalDetails);
-  const setPersonalDetails = useStoreActions(actions => actions.setPersonalDetails);
-  const Navigate = useNavigate();
+  const {personalDetails, setPersonalDetails, Navigate} = useContext(DataContext);
   useEffect(() => {
     setCurrentCategory("Personal Information");
     setCurrentIndex(0);
@@ -65,7 +62,7 @@ const PersonalInfo = ({setCurrentCategory, setCurrentIndex}) => {
             inputProps={{style: {
                 height: '8px'
             }}}
-            name='state'
+            name='email'
             value={personalDetails.email}
             color="primary"
             onChange={(e) => {
