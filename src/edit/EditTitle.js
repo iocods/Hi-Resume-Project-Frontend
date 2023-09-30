@@ -5,6 +5,7 @@ import UpdateButton from "../buttons/UpdateButton";
 const EditTitle = () => {
     const {editResume, setEditResume, editTitle, setEditTitle} = useContext(DataContext);
   return <div>
+    { editResume.title &&
     <form className="edit-title" onSubmit={(e) => e.preventDefault()}>
         <input 
             name="title"
@@ -12,7 +13,7 @@ const EditTitle = () => {
             onChange={(e) => setEditResume({...editResume, [e.target.name]: e.target.value})}
         />
         <UpdateButton onClick={(e) => setEditTitle(false)}/>
-    </form>
+    </form>}
   </div >;
 };
 

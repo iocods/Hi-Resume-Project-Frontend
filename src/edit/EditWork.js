@@ -22,7 +22,7 @@ const EditWork = ({index}) => {
         console.log("updated the work history successfully!");
         setEditWorkStatus(editWorkStatus.map((stats, position) => false));
     }
-  return <div>
+  return <div>{
     <form onSubmit={(e) => e.preventDefault()}>
         <input 
             name="companyName"
@@ -57,7 +57,7 @@ const EditWork = ({index}) => {
         <UpdateButton onClick={() => {
             updateWork();
         }}/>
-    </form>
+    </form>}
   </div>;
 };
 

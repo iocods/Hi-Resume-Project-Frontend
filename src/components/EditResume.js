@@ -54,9 +54,9 @@ const EditResume = () => {
             }
         </div>
         <div>
-            <p>Current Address</p>{ !editAddressStatus ?
+            <p>Current Address</p>{editResume.userAddress && !editAddressStatus ?
             <div>
-                <p>Suite no: {editResume.userAddress.suiteNo}</p>
+                <p>Suite no: {editResume.userAddress.suiteNo ? editResume.userAddress.suiteNo: ''}</p>
                 <p>Address: {editResume.userAddress.address}</p>
                 <p>City {editResume.userAddress.city}</p>
                 <p>Province/State: {editResume.userAddress.province}</p>
@@ -66,7 +66,7 @@ const EditResume = () => {
         </div>
         <div>
             <div className="category-details"><p>Education Details</p> <AddButton /></div>
-            {editResume.userEducationDetails.map((education, index) => !editEducationStatus[index] ? <div key={index}>
+            {editResume.userEducationDetails && editResume.userEducationDetails.map((education, index) => !editEducationStatus[index] ? <div key={index}>
                 {console.log(`${index}.Education Details  ${editEducationStatus[index]}`)}
                 <p>College/Institution Name: {education.collegeName}</p>
                 <p>Field Of Study: {education.field}</p>
@@ -79,7 +79,7 @@ const EditResume = () => {
         </div>
         <div>
             <div className="category-details"><p>Work History</p> <AddButton /></div>
-            {editResume.userWorkHistories.map((work, index) => !editWorkStatus[index] ? <div key={index}>
+            {editResume.userWorkHistories && editResume.userWorkHistories.map((work, index) => !editWorkStatus[index] ? <div key={index}>
                 <p>Company Name: {work.companyName}</p>
                 <p>Role: {work.role}</p>
                 <p>Role Description: {work.description}</p>
