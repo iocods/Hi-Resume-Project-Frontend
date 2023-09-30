@@ -18,14 +18,14 @@ const Header = ({logout}) => {
     const {showCvLink, setShowCvLink, showCoverLetterLink, setShowCoverLetterLink, showResumeLink, setShowResumeLink, onResumeButtonClick, onCvButtonClick, onCoverLetterButtonClick} = useContext(DataContext);
     return (
     <header>
-        <Link className="logo"  to={"/home"}>
+        <Link className="logo"  to={"/"}>
             <Typography className="logo" variant="h5" style={{color: '#fff'}}>
                 Hi-<span>Resume</span>
             </Typography>
         </Link>
         <div className="links-container">
             <div className="relative-link-container">
-                <Link to="/home">Home</Link>
+                <Link to="/">Home</Link>
             </div>
             <div className="relative-link-container">
                 <ButtonWithIcon 

@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import AddProfile from "./AddProfile";
 import {useStoreState, useStoreActions} from "easy-peasy";
 import CreateResume from "./CreateResume";
-import Cv from "./Cv";
 import { Routes, Route } from "react-router-dom";
+import ResumePage from "./ResumePage";
+import EditResume from "./EditResume";
 
 const Resume = () => {
   const resumeType = "RESUME";
@@ -12,7 +13,11 @@ const Resume = () => {
     <Routes>
       <Route
         path={"/"}
-        element={<Cv />}
+        element={<ResumePage />}
+      />
+      <Route
+        path={"/edit"}
+        element={<EditResume />}
       />
       <Route 
         path={"/*"}

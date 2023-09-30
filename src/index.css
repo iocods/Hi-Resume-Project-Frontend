@@ -20,7 +20,7 @@ body {
   background-color: #f4f4f4;
   color: rgb(20, 21, 26);
   line-height: 1.7;
-  font-size: 18px;
+  font-size: 14px;
   padding-top: 4rem;
   
 }
@@ -33,6 +33,14 @@ a{
   /* color: #432300; */
   text-decoration: none;
   padding: 0.5rem;
+}
+textarea{
+  border: #f4f4f4 1px solid;
+  display: block;
+  padding: 0.5rem 1rem;
+  width: 100%;
+  margin: 1rem 0rem;
+  height: 200px;
 }
 a:hover{
   color: #333;
@@ -324,6 +332,49 @@ header a:hover, header button:hover, .links:hover{
   background-color: #fff;
   box-shadow: 10px 10px 30px 0px rgba(0, 0, 0, 0.5);
 }
+.resume-page{
+  background-color: #f4f4f4;
+  margin: 3rem;
+}
+.resume-page > div{
+  max-width: var(--min-width);
+  display: flex;
+  margin: auto;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  padding: 1rem;
+  background-color: #e4e4e4;;
+}
+.resume-list-container{
+  flex-direction: column;
+  margin: auto;
+}
+.resume-list{
+  display: flex;
+  flex-direction: column;
+  padding: 0.25rem;
+  background-color: #fff;
+  border-radius: 3px;
+  box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.5);
+  margin: 0.5rem 0rem;
+}
+.resume-list > div{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.edit-btn, .delete-btn, .download-btn, .preview-btn, .add-btn{
+  background-color: blue;
+  color: #fff;
+  padding: 0.5rem;
+  margin: 0.5rem;
+}
+.resume-list > div button:hover{
+  opacity: 0.75;
+}
+.delete-btn{
+  background-color: #ff0000 !important;
+}
 .text-container{
   flex: 1;
   padding: 0.5rem 2rem;
@@ -335,6 +386,31 @@ header a:hover, header button:hover, .links:hover{
   width: 150px;
   height: 150px;
   border-radius: 50%;
+}
+/** Edit Section Styling */
+.edit-section{
+  max-width: var(--min-width);
+  margin: auto;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+  padding-bottom: 3rem;
+  background-color: #e4e4e4;
+}
+.edit-section > div{
+  max-width: var(--medium-width);
+  margin: 3rem;
+}
+.edit-section > div > div{
+  background-color: #fff;
+  padding: 1rem;
+  margin: 1rem 0rem;
+  box-shadow: 10px 10px 30px 0px rgba(0, 0, 0, 0.5);
+}
+.category-details{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }
 .sign-up-link{
   background-color: transparent;
@@ -350,8 +426,6 @@ footer{
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-}
-.connect{
 }
 .active{
   color: goldenrod !important;
@@ -390,6 +464,7 @@ footer a:hover{
 }
 .medium-font{
   font-size: var(--medium-font);
+  text-align: center;
 }
 .none{
   display: none;

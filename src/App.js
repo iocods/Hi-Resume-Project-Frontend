@@ -18,7 +18,6 @@ const App = () => {
   const {setDropDownFalse} = useContext(DataContext)
 
   useEffect(() => {
-    navigate("/home", {replace: true})
   }, []);
 
 
@@ -33,7 +32,7 @@ const App = () => {
           <Header logout={logout} />
           <Routes>
             <Route exact path='/register' element={<UserRegistration/>} />
-            <Route exact path='/home' element={<Home />} />
+            <Route exact path='/' element={<Home />} />
             <Route exact path="/resume/*" element={<Resume />} />
             <Route exact path="/cv/*" element={<Cv />} />
           </Routes>
