@@ -20,9 +20,9 @@ const ResumePage = () => {
     const resume = [{
         title: "Resume Title I",
         userInformation: {
-            firstname: 'Terry',
-            lastname: 'Okoro',
-            email: 'Terry@gmail.com'
+            firstname: 'Timothy',
+            lastname: 'Johnson',
+            email: 'TJohnson@gmail.com'
         },
         userAddress: {
             suiteNo: 7,

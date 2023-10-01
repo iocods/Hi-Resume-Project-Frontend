@@ -16,6 +16,9 @@ export const DataProvider = ({ children }) => {
     const[editReferenceStatus, setEditReferenceStatus] = useState([]);
     const[editAddressStatus, setEditAddressStatus] = useState(false);
 
+    /**States For Adding new Details when editing the Resume */
+    const [addWorkStatus, setAddWorkStatus] = useState(false);
+
     /** States and methods for the different link in the headers */
     const [showCvLink, setShowCvLink] = useState(false);
     const [showCoverLetterLink, setShowCoverLetterLink] = useState(false);
@@ -167,14 +170,7 @@ export const DataProvider = ({ children }) => {
         setReference(newReferenceList);
         setNewReference({...newReference, fullname: '', role: '', company: '', tel: '', email: ''});
     }
-    const [resume, setResume] = useState({
-        userInfo: personalDetails,
-        userEducation: education,
-        userWork: workHistory,
-        userSkill: skills,
-        userLanguage: languages,
-        userReferee: reference
-    });
+    const [resume, setResume] = useState([]);
     const onCreateFinish = async () => {
         const resume = {
             personalDetails: personalDetails,
@@ -206,10 +202,52 @@ export const DataProvider = ({ children }) => {
             Navigate(`/`, {replace: true});
         }
     }
+    const updateEducation = (index) => {
+        setEditEducationStatus(editEducationStatus.map((stats, position) => (position === index) ? true : false));
+    }
+    const updateWork = (index) => {
+        setEditWorkStatus(editWorkStatus.map((stats, position) => (position === index) ? true : false));
+    }
+    const updateReference = (index) => {
+        console.log("Updating Reference");
+        console.log(`${index}`)
+        setEditReferenceStatus(editReferenceStatus.map((stats, position) => (position === index) ? true : false));
+    }
+    const deleteEducation = (index) => {
+        const newEducationDetails = editResume.userEducationDetails.filter((_, position) => position !== index);
+        setEditResume({...editResume, userEducationDetails: newEducationDetails});
+    }
+    const deleteWork = (index) => {
+        const newWorkHistories = editResume.userWorkHistories.filter((_, position) => position !== index);
+        setEditResume({...editResume, userWorkHistories: newWorkHistories});
+    }
+    const deleteReference = (index) => {
+        const newReference = editResume.userReference.filter((_, position) => position !== index);
+        setEditResume({...editResume, userReference: newReference});
+    }
+    function updateStatus() {
+        const length = editResume.userEducationDetails.length;
+        const workLength = editResume.userWorkHistories.length;
+        const refLength = editResume.userReference.length;
+        const newEducationStatus = [];
+        const newWorkStatus = [];
+        const newRefStatus = [];
+        for(let i = 0; i < length; i++)   
+            newEducationStatus.push(false);
+        for(let j = 0; j < workLength; j++)
+            newWorkStatus.push(false);
+        for(let i = 0; i < refLength; i++)
+            newRefStatus.push(false);
+        setEditEducationStatus(newEducationStatus);
+        setEditWorkStatus(newWorkStatus);
+        setEditReferenceStatus(newRefStatus);
+    }
+    const [addEducationStatus, setAddEducationStatus] = useState(false);
+    const [addReferenceStatus, setAddReferenceStatus] = useState(false);
     return (
         <DataContext.Provider value={{
             Navigate, addDetails, education, setEducation, newEducationDetails, setNewEducationDetails, 
-            newWorkHistory, setNewWorkHistory, addSkill, addLanguage, newSkill, setNewSkill, newLanguage, setNewLanguage, skills, setSkills, languages, setLanguages,reference, setReference, newReference, setNewReference, addReferee, personalDetails, setPersonalDetails, resume, setResume, onCreateFinish,showCvLink, setShowCvLink, showResumeLink, setShowResumeLink, showCoverLetterLink, setShowCoverLetterLink, onResumeButtonClick, onCoverLetterButtonClick, onCvButtonClick, setDropDownFalse, editResume, setEditResume, editTitle, setEditTitle, editPersonalDetails, setEditPersonalDetails, editEducationStatus, setEditEducationStatus, editWorkStatus, setEditWorkStatus,editUserInformationStatus, setEditUserInformationStatus, editAddressStatus, setEditAddressStatus, editReferenceStatus, setEditReferenceStatus
+            newWorkHistory, setNewWorkHistory, addSkill, addLanguage, newSkill, setNewSkill, newLanguage, setNewLanguage, skills, setSkills, languages, setLanguages,reference, setReference, newReference, setNewReference, addReferee, personalDetails, setPersonalDetails, resume, setResume, onCreateFinish,showCvLink, setShowCvLink, showResumeLink, setShowResumeLink, showCoverLetterLink, setShowCoverLetterLink, onResumeButtonClick, onCoverLetterButtonClick, onCvButtonClick, setDropDownFalse, editResume, setEditResume, editTitle, setEditTitle, editPersonalDetails, setEditPersonalDetails, editEducationStatus, setEditEducationStatus, editWorkStatus, setEditWorkStatus,editUserInformationStatus, setEditUserInformationStatus, editAddressStatus, setEditAddressStatus, editReferenceStatus, setEditReferenceStatus, updateEducation, updateWork, updateReference, deleteEducation, deleteWork, deleteReference, updateStatus, setAddWorkStatus, addWorkStatus, addEducationStatus, setAddEducationStatus, addReferenceStatus, setAddReferenceStatus
         }}>
             {children}
         </DataContext.Provider>

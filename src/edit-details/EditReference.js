@@ -4,8 +4,6 @@ import UpdateButton from "../buttons/UpdateButton";
 
 const EditReference = ({index}) => {
     const{editResume, setEditResume, editReferenceStatus, setEditReferenceStatus} = useContext(DataContext);
-    const [editUserInfomation, setEditUserInfomation] = useState(editResume.userInformation);
-    const [editReference, setEditReference] = useState(editReferenceStatus[index]);
     const [reference, setReference] = useState(editResume.userReference[index]);
     const updateReference = () => {
         const newUserReference = editResume.userReference.map((e, position) => (
