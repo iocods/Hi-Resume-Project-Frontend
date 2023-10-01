@@ -13,6 +13,7 @@ export const DataProvider = ({ children }) => {
     const[editEducationStatus, setEditEducationStatus] = useState([]);
     const[editUserInformationStatus, setEditUserInformationStatus] = useState(false);
     const[editWorkStatus, setEditWorkStatus] = useState([]);
+    const[editReferenceStatus, setEditReferenceStatus] = useState([]);
     const[editAddressStatus, setEditAddressStatus] = useState(false);
 
     /** States and methods for the different link in the headers */
@@ -65,7 +66,16 @@ export const DataProvider = ({ children }) => {
             degree: 'B.Eng',
             start: '2008',
             end: '2012'
-        }]
+        }],
+        userReference: [
+            {
+                referenceName: '',
+                referenceRole: '',
+                referenceCompanyName: '',
+                referenceEmail: '',
+                referenceTel: ''
+            }
+        ]
     });
     
     const onResumeButtonClick = () => {
@@ -199,7 +209,7 @@ export const DataProvider = ({ children }) => {
     return (
         <DataContext.Provider value={{
             Navigate, addDetails, education, setEducation, newEducationDetails, setNewEducationDetails, 
-            newWorkHistory, setNewWorkHistory, addSkill, addLanguage, newSkill, setNewSkill, newLanguage, setNewLanguage, skills, setSkills, languages, setLanguages,reference, setReference, newReference, setNewReference, addReferee, personalDetails, setPersonalDetails, resume, setResume, onCreateFinish,showCvLink, setShowCvLink, showResumeLink, setShowResumeLink, showCoverLetterLink, setShowCoverLetterLink, onResumeButtonClick, onCoverLetterButtonClick, onCvButtonClick, setDropDownFalse, editResume, setEditResume, editTitle, setEditTitle, editPersonalDetails, setEditPersonalDetails, editEducationStatus, setEditEducationStatus, editWorkStatus, setEditWorkStatus,editUserInformationStatus, setEditUserInformationStatus, editAddressStatus, setEditAddressStatus
+            newWorkHistory, setNewWorkHistory, addSkill, addLanguage, newSkill, setNewSkill, newLanguage, setNewLanguage, skills, setSkills, languages, setLanguages,reference, setReference, newReference, setNewReference, addReferee, personalDetails, setPersonalDetails, resume, setResume, onCreateFinish,showCvLink, setShowCvLink, showResumeLink, setShowResumeLink, showCoverLetterLink, setShowCoverLetterLink, onResumeButtonClick, onCoverLetterButtonClick, onCvButtonClick, setDropDownFalse, editResume, setEditResume, editTitle, setEditTitle, editPersonalDetails, setEditPersonalDetails, editEducationStatus, setEditEducationStatus, editWorkStatus, setEditWorkStatus,editUserInformationStatus, setEditUserInformationStatus, editAddressStatus, setEditAddressStatus, editReferenceStatus, setEditReferenceStatus
         }}>
             {children}
         </DataContext.Provider>

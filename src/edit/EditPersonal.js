@@ -7,25 +7,28 @@ const EditPersonal = () => {
     const [editUserInfomation, setEditUserInfomation] = useState(editResume.userInformation);
     const updateUserInformation = () => {
         setEditResume({...editResume, userInformation: editUserInfomation});
-        setEditUserInformationStatus(false);
+        setTimeout(() => (setEditUserInformationStatus(false)), 0);
     }
   return <div>
     <form onSubmit={e => e.preventDefault()}>
         <input 
             name="firstname"
             placeholder="Firstname"
+            required={true}
             value={editUserInfomation.firstname}
             onChange={(e) => setEditUserInfomation({...editUserInfomation, [e.target.name]: e.target.value})}
         />
         <input 
             name="lastname"
             placeholder="Lastname"
+            required={true}
             value={editUserInfomation.lastname}
             onChange={(e) => setEditUserInfomation({...editUserInfomation, [e.target.name]: e.target.value})}
         />
         <input 
             name="email"
             placeholder="Email"
+            required={true}
             value={editUserInfomation.email}
             onChange={(e) => setEditUserInfomation({...editUserInfomation, [e.target.name]: e.target.value})}
         />

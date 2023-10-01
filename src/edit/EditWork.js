@@ -16,11 +16,9 @@ const EditWork = ({index}) => {
             (position === index) ? editWork :  w)
         )
         newWorkHistories.description = description;
-        console.log(`1. ${JSON.stringify(editResume)}`);
         setEditResume({...editResume, userWorkHistories: newWorkHistories});
-        console.log(`2. ${JSON.stringify(editResume)}`);
-        console.log("updated the work history successfully!");
-        setEditWorkStatus(editWorkStatus.map((stats, position) => false));
+        setTimeout(() => 
+        setEditWorkStatus(editWorkStatus.map((stats, position) => false)), 0);
     }
   return <div>{
     <form onSubmit={(e) => e.preventDefault()}>

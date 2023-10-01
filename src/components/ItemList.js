@@ -8,14 +8,11 @@ import DeleteButton from "../buttons/DeleteButton";
 import DataContext from "../context/DataContext";
 
 const ItemList = ({item}) => {
-  const{setEditResume} = useContext(DataContext);
+  const{setEditResume, editResume} = useContext(DataContext);
   const Navigate = useNavigate();
-  const editResume = () => {
-    console.log(JSON.stringify(item))
-    setEditResume(item);
-    setTimeout( () => {
-      Navigate('edit', {replace: true})
-      }, 3000);
+  const editCurrentResume = () => {
+    setEditResume({...editResume, ...item})
+    Navigate('edit', {replace: true})
   }
   return <div className="resume-list">
     <div>
@@ -23,7 +20,7 @@ const ItemList = ({item}) => {
         <div>
             <PreviewButton />
             <DownloadButton />
-            <EditButton onClick={() => editResume()}/>
+            <EditButton onClick={() => editCurrentResume()}/>
             <DeleteButton />
         </div>
     </div>

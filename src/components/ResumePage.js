@@ -60,10 +60,10 @@ const ResumePage = () => {
             end: '2012'
         }]
         }
-    // , 
-    //     {
-    //         title: "Resume Title II"
-    //     }
+    , 
+        {
+            title: "Resume Title II"
+        }
     ]
   return <section className="resume-page">
     <div className="resume-list-container">

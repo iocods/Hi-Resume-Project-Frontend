@@ -9,45 +9,47 @@ const EditEducation = ({index}) => {
         const newEducationDetails = editResume.userEducationDetails.map((e, position) => (
             (position === index) ? editEducation :  e)
         )
-        console.log(`1. ${JSON.stringify(editResume)}`);
         setEditResume({...editResume, userEducationDetails: newEducationDetails});
-        console.log(`2. ${JSON.stringify(editResume)}`);
-        console.log("updated the details successfully!");
         setEditEducationStatus(editEducationStatus.map((stats, position) => false));
     }
   return <div>
     <form onSubmit={(e) => e.preventDefault()}>
         <input 
             name="collegeName"
+            required
             placeholder="College Name"
             value={editEducation.collegeName}
             onChange={(e) => setEditEducation({...editEducation, [e.target.name]: e.target.value})}
         />
         <input 
             name="degree"
+            required
             placeholder="Degree"
             value={editEducation.degree}
             onChange={(e) => setEditEducation({...editEducation, [e.target.name]: e.target.value})}
         />
         <input 
-            name="Field Of study"
+            name="field"
+            required
             placeholder="Field"
             value={editEducation.field}
             onChange={(e) => setEditEducation({...editEducation, [e.target.name]: e.target.value})}
         />
         <input 
             name="start"
+            required
             placeholder="Start Date"
             value={editEducation.start}
             onChange={(e) => setEditEducation({...editEducation, [e.target.name]: e.target.value})}
         />
         <input 
             name="end"
+            required
             placeholder="End Date"
             value={editEducation.end}
             onChange={(e) => setEditEducation({...editEducation, [e.target.name]: e.target.value})}
         />
-        <UpdateButton onClick={() => {
+        <UpdateButton type="submit" onClick={() => {
             updateEducation();
         }}/>
     </form>

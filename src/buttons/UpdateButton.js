@@ -1,7 +1,7 @@
 import { FaSave } from "react-icons/fa";
 
-const UpdateButton = ({onClick}) => {
-    return <button className="preview-btn" onClick={onClick}>
+const UpdateButton = ({type, onClick}) => {
+    return <button type={type} className="preview-btn" onClick={onClick}>
             <FaSave />
             <span> Update</span>
         </button>
