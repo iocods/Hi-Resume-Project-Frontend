@@ -12,14 +12,16 @@ import EditReference from "../edit-details/EditReference";
 import AddWork from "../add-details/AddWork";
 import AddEducation from "../add-details/AddEducation";
 import AddReference from "../add-details/AddReference";
+import UpdateButton from "../buttons/UpdateButton";
 
 const EditResume = () => {
-    const{editResume, editTitle, setEditTitle, editEducationStatus,setEditEducationStatus, editWorkStatus, setEditWorkStatus, setEditUserInformationStatus, editUserInformationStatus, editAddressStatus, setEditAddressStatus, editReferenceStatus, setEditReferenceStatus, updateEducation, updateWork, updateReference, deleteEducation, deleteWork, deleteReference, updateStatus, addWorkStatus, setAddWorkStatus, addEducationStatus, setAddEducationStatus,addReferenceStatus, setAddReferenceStatus} = useContext(DataContext);
+    const{editResume, editTitle, setEditTitle, editEducationStatus, setEditEducationStatus, editWorkStatus, setEditWorkStatus, setEditUserInformationStatus, editUserInformationStatus, editAddressStatus, setEditAddressStatus, editReferenceStatus, setEditReferenceStatus, updateEducation, updateWork, updateReference, deleteEducation, deleteWork, deleteReference, updateStatus, addWorkStatus, setAddWorkStatus, addEducationStatus, setAddEducationStatus,addReferenceStatus, setAddReferenceStatus} = useContext(DataContext);
     
     useEffect(() => {
         console.log("Reloading from useEffect hook");
         updateStatus();
     }, [])
+    
   return <section>
     <section className="edit-section">
         <div>
@@ -46,25 +48,27 @@ const EditResume = () => {
         <div>
             <p>Current Address</p>{editResume.userAddress && !editAddressStatus ?
             <div>
-                <p>Suite no: {editResume.userAddress.suiteNo ? editResume.userAddress.suiteNo: ''}</p>
-                <p>Address: {editResume.userAddress.address ? editResume.userAddress.address : ''}</p>
+                <p>Suite no: {editResume.userAddress.suiteNumber ? editResume.userAddress.suiteNumber: ''}</p>
+                <p>Address: {editResume.userAddress.street ? editResume.userAddress.street : ''}</p>
                 <p>City {editResume.userAddress.city ? editResume.userAddress.city : ''}</p>
-                <p>Province/State: {editResume.userAddress.province ? editResume.userAddress.province : ''}</p>
+                <p>Province/State: {editResume.userAddress.state ? editResume.userAddress.state : ''}</p>
                 <p>Country: {editResume.userAddress.country ? editResume.userAddress.country : ''}</p>
                 <EditButton onClick={() => setEditAddressStatus(true)}/>
             </div>: <EditAddress />}
         </div>
         <div>{
                 !addEducationStatus ?
-                <div className="category-details"><p>Education Details</p> <AddButton onClick={() => setAddEducationStatus(!addEducationStatus)}/></div> :
+                <div className="category-details"><p>Education Details</p> 
+                {console.log(editResume.userEducationDetails)}
+                <AddButton onClick={() => setAddEducationStatus(!addEducationStatus)}/></div> :
                 <AddEducation />
             }
             {editResume.userEducationDetails && editResume.userEducationDetails.map((education, index) => !editEducationStatus[index] ? <div key={index}>
-                <p>College/Institution Name: {education.collegeName}</p>
-                <p>Field Of Study: {education.field}</p>
-                <p>Degree: {education.degree}</p>
-                <p>Start Date: {education.start}</p>
-                <p>End Date: {education.end}</p>
+                <p>College/Institution Name: {education.institutionName}</p>
+                <p>Field Of Study: {education.courseOfStudy}</p>
+                <p>Degree: {education.degreeType}</p>
+                <p>Start Date: {education.startDate}</p>
+                <p>End Date: {education.endDate}</p>
                 <EditButton onClick={() => updateEducation(index)}/> 
                 <DeleteButton onClick={() => deleteEducation(index)}/>
             </div> : <EditEducation key={index} index={index}/>)}
@@ -79,10 +83,11 @@ const EditResume = () => {
             {
                 editResume.userWorkHistories && editResume.userWorkHistories.map((work, index) => !editWorkStatus[index] ? <div key={index}>
                     <p>Company Name: {work.companyName}</p>
+                    <p>Company Address: {work.companyAddress}</p>
                     <p>Role: {work.role}</p>
-                    <p>Role Description: {work.description}</p>
-                    <p>Start Date: {work.start}</p>
-                    <p>End Date: {work.end}</p>
+                    <p>Role Description: {work.roleDescription}</p>
+                    <p>Start Date: {work.startDate}</p>
+                    <p>End Date: {work.endDate}</p>
                     <EditButton onClick={() => updateWork(index)}/> 
                     <DeleteButton onClick={() => deleteWork(index)}/>
                 </div>: <EditWork key={index} index={index}/>
@@ -95,17 +100,18 @@ const EditResume = () => {
             {
                 editResume.userReference.map((ref, index) => !editReferenceStatus[index] ? 
                 <div key={index}>
-                    <p>Referee Name: {ref.referenceName}</p>
-                    <p>Referee Role: {ref.referenceRole}</p>
-                    <p>Referee Organization: {ref.referenceCompanyName}</p>
-                    <p>Referee Email: {ref.referenceEmail}</p>
-                    <p>Referee Tel: {ref.referenceTel}</p>
+                    <p>Referee Name: {ref.fullname}</p>
+                    <p>Referee Role: {ref.role}</p>
+                    <p>Referee Organization: {ref.company}</p>
+                    <p>Referee Email: {ref.email}</p>
+                    <p>Referee Tel: {ref.tel}</p>
                     <EditButton onClick={() => updateReference(index)}/> 
                     <DeleteButton onClick={() => deleteReference(index)}/>
                 </div> : 
                 <EditReference key={index} index={index}/> 
             )}
         </div>
+        <UpdateButton text={"Resume"} />
     </section>
     <section></section>
   </section>;

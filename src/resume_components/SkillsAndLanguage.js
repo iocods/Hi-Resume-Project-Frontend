@@ -7,7 +7,7 @@ const SkillsAndLanguage = ({setCurrentCategory, setCurrentIndex}) => {
   useEffect(() => {
     setCurrentCategory("Skills and Language");
     setCurrentIndex(index => index = 4);
-  }, [])
+  }, []);
   return <form onSubmit={(e) => e.preventDefault()}>
   <div>
     <div>

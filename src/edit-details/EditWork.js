@@ -29,28 +29,34 @@ const EditWork = ({index}) => {
             onChange={(e) => setEditWork({...editWork, [e.target.name]: e.target.value})}
         />
         <input 
+            name="companyAddress"
+            placeholder="Company Address"
+            value={editWork.companyAddress}
+            onChange={(e) => setEditWork({...editWork, [e.target.name]: e.target.value})}
+        />
+        <input 
             name="role"
             placeholder="Role/Responsibilities"
             value={editWork.role}
             onChange={(e) => setEditWork({...editWork, [e.target.name]: e.target.value})}
         />
         <input 
-            name="start"
+            name="startDate"
             placeholder="Start Date"
-            value={editWork.start}
+            value={editWork.startDate}
             onChange={(e) => setEditWork({...editWork, [e.target.name]: e.target.value})}
         />
         <input 
-            name="end"
+            name="endDate"
             placeholder="End Date"
-            value={editWork.end}
+            value={editWork.endDate}
             onChange={(e) => setEditWork({...editWork, [e.target.name]: e.target.value})}
         />
         {/* <ReactQuill value={description} theme='snow' onChange={setDescription}/> */}
         <textarea 
-            name="description"
+            name="roleDescription"
             placeholder="Describe Your Role"
-            value={editWork.description}
+            value={editWork.roleDescription}
             onChange={(e) => setEditWork({...editWork, [e.target.name]: e.target.value})} />
         <UpdateButton onClick={() => {
             updateWork();

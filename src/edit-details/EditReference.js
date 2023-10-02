@@ -15,38 +15,38 @@ const EditReference = ({index}) => {
   return <div>
     <form onSubmit={e => e.preventDefault()}>
         <input 
-            name="referenceName"
+            name="fullname"
             placeholder="Fullname"
             required={true}
-            value={reference.referenceName}
+            value={reference.fullname}
             onChange={(e) => setReference({...reference, [e.target.name]: e.target.value})}
         />
         <input 
-            name="referenceCompanyName"
+            name="company"
             placeholder="Organization"
             required={true}
-            value={reference.referenceCompanyName}
+            value={reference.company}
             onChange={(e) => setReference({...reference, [e.target.name]: e.target.value})}
         />
         <input 
-            name="referenceRole"
+            name="role"
             placeholder="Role"
             required={true}
-            value={reference.referenceRole}
+            value={reference.role}
             onChange={(e) => setReference({...reference, [e.target.name]: e.target.value})}
         />
         <input 
-            name="referenceEmail"
+            name="email"
             placeholder="Email"
             required={true}
-            value={reference.referenceEmail}
+            value={reference.email}
             onChange={(e) => setReference({...reference, [e.target.name]: e.target.value})}
         />
         <input 
-            name="referenceTel"
+            name="tel"
             placeholder="Tel"
             required={true}
-            value={reference.referenceTel}
+            value={reference.tel}
             onChange={(e) => setReference({...reference, [e.target.name]: e.target.value})}
         />
         <UpdateButton onClick={() => updateReference()}/>

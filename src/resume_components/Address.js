@@ -1,7 +1,8 @@
-import {React, useEffect}from "react";
+import {React, useContext, useEffect, useState}from "react";
 import { TextField, Button } from "@mui/material";
 import {useStoreState, useStoreActions} from 'easy-peasy';
 import { useNavigate } from "react-router-dom";
+import DataContext from "../context/DataContext";
 
 
 const Address = ({title, setIsCreated, setCurrentCategory, setCurrentIndex}) => {
@@ -11,10 +12,13 @@ const Address = ({title, setIsCreated, setCurrentCategory, setCurrentIndex}) => 
     const token = useStoreState(states => states.userHeader);
     console.log(`Title found in state is ${title}`);
     const AUTH_URL = `http://localhost:8080/resume/my-profile/${title}/address`;
+    const{newResume, setNewResume, isMounted, setIsMounted} = useContext(DataContext);
     const Navigate = useNavigate();
     useEffect(() => {
+        !isMounted && console.log('setting is mounted');
         setCurrentCategory("Current Address");
         setCurrentIndex(1);
+        setIsMounted(true);
     }, []);
     const saveAddress = async () => {
         let response = null;
@@ -130,11 +134,17 @@ const Address = ({title, setIsCreated, setCurrentCategory, setCurrentIndex}) => 
         ></TextField>
         <div>
             <Button
-                onClick={() => Navigate('/resume/personal', {replace: true})}>
+                onClick={() => {
+                    Navigate('/resume/personal', {replace: true})
+                    }}>
                 Prev
             </Button>
             <Button
-                onClick={() => Navigate(`/resume/education`, {replace: true})}
+                onClick={
+                    () => {
+                        Navigate(`/resume/education`, {replace: true})
+                    }
+                }
             > 
                 Next
             </Button>

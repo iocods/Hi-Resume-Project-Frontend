@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, {useContext, useEffect} from "react";
 import ItemList from "./ItemList";
 import DataContext from "../context/DataContext";
 import { useStoreState } from "easy-peasy";
@@ -16,55 +16,36 @@ const ResumePage = () => {
         imageThree,
         imageFour
     ]
+    const {resume, setResume} = useContext(DataContext);
     const type = useStoreState(state => state.type);
-    const resume = [{
-        title: "Resume Title I",
-        userInformation: {
-            firstname: 'Timothy',
-            lastname: 'Johnson',
-            email: 'TJohnson@gmail.com'
-        },
-        userAddress: {
-            suiteNo: 7,
-            address: 'Tony Johnson off ong highway',
-            city: 'Vegas City',
-            province: 'California',
-            country: 'United States'
-        },
-        userWorkHistories: [{
-            companyName: 'Mecury Incoporated',
-            role: 'Managing Director',
-            description: 'I was the managing director of the cooperation for a period of 7 years and as a managing director of the company I was in charge of some major operatons that the company carried out in ',
-            start: 'June 2011',
-            end: 'April 2018',
-        },
-        {
-            companyName: 'Hot Drills Limited',
-            role: 'Head Driller',
-            description: 'Hot Drills is a company that deals mainly with the delevery of services which mainly involves the drilling of bore holes, reservoirs amongst others, I was head driller at Hot drills for a span of 3 years and during this period Hot drills saw an increase in the efficiency of it workers as I saw to it that my main responsibility was my number one priority I made sure that drillers that were placed under me all got their job done and as a result of this I had to properly inspect the jobs of junior drillers at intervals and corrected them where they may have made some errors and this saw to the growth of the drillers and over time they got properly aquainted with the job',
-            start: 'September 2019',
-            end: '2022',
-        }],
-        userEducationDetails: [{
-            collegeName: 'Western Boys High School',
-            field: 'Science',
-            degree: 'WASSCE',
-            start: '2000',
-            end: '2006'
-        },
-        {
-            collegeName: 'University of Notre Dame',
-            field: 'Civil Engineering',
-            degree: 'B.Eng',
-            start: '2008',
-            end: '2012'
-        }]
+    const AUTH_URL = `http://localhost:8080/resume/my-profile`;
+    const getResumes = async () => {
+        let response = null;
+        const requestObject = {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': sessionStorage.getItem('jwt')
+            }
         }
-    , 
-        {
-            title: "Resume Title II"
+        try{
+            response = await fetch(AUTH_URL, requestObject);
+            if(!response.ok) throw Error("Invalid Username or Password");
+            console.log(response);
+            const data = await response.json();
+            setResume(data);
+            console.log(data);
         }
-    ]
+        catch(error){
+            console.log(error.message);
+        }
+        finally{
+            console.log("Fetch method called");
+        }
+    }
+    useEffect(() => {
+        getResumes();
+    }, []);
   return <section className="resume-page">
     <div className="resume-list-container">
         <h2>Your Resumes</h2>

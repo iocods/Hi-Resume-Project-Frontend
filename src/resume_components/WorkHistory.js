@@ -5,13 +5,14 @@ import { useNavigate } from "react-router-dom";
 import DataContext from "../context/DataContext";
 
 const WorkHistory = ({setCurrentCategory, setCurrentIndex}) => {
-    const {education, workHistory, setWorkHistory, newWorkHistory, setNewWorkHistory, addWorkHistory} = useContext(DataContext)
+    const {education, workHistory, setWorkHistory, newWorkHistory, setNewWorkHistory, addWorkDetails} = useContext(DataContext)
   const Navigate = useNavigate();
   useEffect(() => {
         setCurrentCategory('Work History');
         setCurrentIndex(3);
         console.log(`printing the list of education from the workhistory panel ${JSON.stringify(education)}`);
     },[]);
+    
   return <div>
     <form onSubmit={(e) => e.preventDefault()}>
         <TextField
@@ -98,7 +99,7 @@ const WorkHistory = ({setCurrentCategory, setCurrentIndex}) => {
                 Next
             </Button>
             <Button
-                onClick={addWorkHistory}
+                onClick={() => addWorkDetails()}
             >
                 Add WorkHistory.
             </Button>

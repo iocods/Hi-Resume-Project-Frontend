@@ -4,13 +4,27 @@ import { useNavigate } from "react-router-dom";
 import DataContext from "../context/DataContext";
 
 const PersonalInfo = ({setCurrentCategory, setCurrentIndex}) => {
-  const {personalDetails, setPersonalDetails, Navigate} = useContext(DataContext);
+  const {personalDetails, setPersonalDetails, Navigate, title, setTitle} = useContext(DataContext);
   useEffect(() => {
     setCurrentCategory("Personal Information");
     setCurrentIndex(0);
   }, [])
   return <form onSubmit={(e) => e.preventDefault()}>
      <div>
+        <TextField
+            required={true}
+            style={{width: "90%", margin: 10}}
+            type="text"
+            label='Title'
+            inputProps={{style: {
+              height: '8px'
+            }}}
+            name='title'
+            value={title}
+            color="primary"
+            onChange={(e) => setTitle(e.target.value)}
+        ></TextField>
+        <br />
         <TextField
             required={true}
             style={{width: "90%", margin: 10}}

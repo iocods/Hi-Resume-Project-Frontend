@@ -12,15 +12,15 @@ const EditAddress = () => {
   return <div>
     <form onSubmit={(e) => e.preventDefault()}>
         <input 
-            name="suiteNo"
+            name="suiteNumber"
             placeholder="Suite Number"
             value={editAddress.suiteNo}
             onChange={(e) => setEditAddress({...editAddress, [e.target.name]: e.target.value})}
         />
         <input 
-            name="address"
-            placeholder="address"
-            value={editAddress.address}
+            name="street"
+            placeholder="Street"
+            value={editAddress.street}
             onChange={(e) => setEditAddress({...editAddress, [e.target.name]: e.target.value})}
         />
         <input 
@@ -30,9 +30,9 @@ const EditAddress = () => {
             onChange={(e) => setEditAddress({...editAddress, [e.target.name]: e.target.value})}
         />
         <input 
-            name="province"
-            placeholder="Province / City"
-            value={editAddress.province}
+            name="city"
+            placeholder="Province / State"
+            value={editAddress.city}
             onChange={(e) => setEditAddress({...editAddress, [e.target.name]: e.target.value})}
         />
         <input 

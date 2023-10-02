@@ -33,7 +33,7 @@ const Login = () => {
             sessionStorage.setItem("jwt", jwtToken);
             setUser({...user, password: '', authorized: true});
             setHeader({...headers, Authorization: jwtToken});
-            navigate('/home', {replace: true});
+            navigate('/', {replace: true});
         }
         catch(error){
             console.log(error.message);

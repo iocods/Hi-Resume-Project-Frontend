@@ -23,8 +23,8 @@ const Education = ({setCurrentCategory, setCurrentIndex}) => {
             inputProps={{style: {
                 height: '8px'
             }}}
-            name='nameOfInstitution'
-            value={newEducationDetails.nameOfInstitution}
+            name='institutionName'
+            value={newEducationDetails.institutionName}
             color="primary"
             onClick={onInputClick}
             onChange={(e) => {
@@ -101,7 +101,7 @@ const Education = ({setCurrentCategory, setCurrentIndex}) => {
                 Next
             </Button>
             <Button
-                onClick={addDetails}
+                onClick={() => addDetails()}
             >
                 Add Education Details.
             </Button>

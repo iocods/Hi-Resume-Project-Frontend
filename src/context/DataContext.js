@@ -9,12 +9,15 @@ export const DataProvider = ({ children }) => {
     const [education, setEducation] = useState([]);
     const [workHistory, setWorkHistory] = useState([]);
     /** States and methods for Editing a Resume or Cv */
+    const[title, setTitle] = useState('');
     const[editTitle, setEditTitle] = useState(false);
     const[editEducationStatus, setEditEducationStatus] = useState([]);
     const[editUserInformationStatus, setEditUserInformationStatus] = useState(false);
     const[editWorkStatus, setEditWorkStatus] = useState([]);
     const[editReferenceStatus, setEditReferenceStatus] = useState([]);
     const[editAddressStatus, setEditAddressStatus] = useState(false);
+
+    const [newResume, setNewResume] = useState({})
 
     /**States For Adding new Details when editing the Resume */
     const [addWorkStatus, setAddWorkStatus] = useState(false);
@@ -29,17 +32,17 @@ export const DataProvider = ({ children }) => {
             email: 'Terry@gmail.com'
         })
     const [editResume, setEditResume] = useState({
-        title: 'Edit User Title',
+        title: 'Title Not Available',
         userInformation: {
             firstname: 'Terry',
             lastname: 'Okoro',
             email: 'Terry@gmail.com'
         },
         userAddress: {
-            suiteNo: 7,
-            address: 'Tony Johnson off ong highway',
+            suiteNumber: 7,
+            street: 'Tony Johnson off ong highway',
             city: 'Vegas City',
-            province: 'California',
+            state: 'California',
             country: 'United States'
         },
         userWorkHistories: [{
@@ -72,11 +75,11 @@ export const DataProvider = ({ children }) => {
         }],
         userReference: [
             {
-                referenceName: '',
-                referenceRole: '',
-                referenceCompanyName: '',
-                referenceEmail: '',
-                referenceTel: ''
+                fullname: '',
+                role: '',
+                company: '',
+                email: '',
+                tel: ''
             }
         ]
     });
@@ -107,7 +110,7 @@ export const DataProvider = ({ children }) => {
     const [newEducationDetails, setNewEducationDetails] = useState({
         startDate: '',
         endDate: '',
-        nameOfInstitution: ' ',
+        institutionName: ' ',
         courseOfStudy: ' ',
         degreeType: ' '
     });
@@ -143,6 +146,7 @@ export const DataProvider = ({ children }) => {
 
     const addDetails = () => {
         const newEducationList = [...education, newEducationDetails];
+        console.log(`Adding Education Details!`);
         setEducation(newEducationList);
         setNewEducationDetails({...newEducationDetails, degreeType: '', nameOfInstitution: '', courseOfStudy: '', startDate: '', endDate: ''});
     }
@@ -170,16 +174,64 @@ export const DataProvider = ({ children }) => {
         setReference(newReferenceList);
         setNewReference({...newReference, fullname: '', role: '', company: '', tel: '', email: ''});
     }
-    const [resume, setResume] = useState([]);
+    const [resume, setResume] = useState([[{
+        title: "Resume Title I",
+        userInformation: {
+            firstname: 'Timothy',
+            lastname: 'Johnson',
+            email: 'TJohnson@gmail.com'
+        },
+        userAddress: {
+            suiteNo: 7,
+            address: 'Tony Johnson off ong highway',
+            city: 'Vegas City',
+            province: 'California',
+            country: 'United States'
+        },
+        userWorkHistories: [{
+            companyName: 'Mecury Incoporated',
+            role: 'Managing Director',
+            description: 'I was the managing director of the cooperation for a period of 7 years and as a managing director of the company I was in charge of some major operatons that the company carried out in ',
+            start: 'June 2011',
+            end: 'April 2018',
+        },
+        {
+            companyName: 'Hot Drills Limited',
+            role: 'Head Driller',
+            description: 'Hot Drills is a company that deals mainly with the delevery of services which mainly involves the drilling of bore holes, reservoirs amongst others, I was head driller at Hot drills for a span of 3 years and during this period Hot drills saw an increase in the efficiency of it workers as I saw to it that my main responsibility was my number one priority I made sure that drillers that were placed under me all got their job done and as a result of this I had to properly inspect the jobs of junior drillers at intervals and corrected them where they may have made some errors and this saw to the growth of the drillers and over time they got properly aquainted with the job',
+            start: 'September 2019',
+            end: '2022',
+        }],
+        userEducationDetails: [{
+            collegeName: 'Western Boys High School',
+            field: 'Science',
+            degree: 'WASSCE',
+            start: '2000',
+            end: '2006'
+        },
+        {
+            collegeName: 'University of Notre Dame',
+            field: 'Civil Engineering',
+            degree: 'B.Eng',
+            start: '2008',
+            end: '2012'
+        }]
+        }
+    , 
+        {
+            title: "Resume Title II"
+        }
+    ]]);
     const onCreateFinish = async () => {
         const resume = {
-            personalDetails: personalDetails,
-            educationDetails: education,
-            history: workHistory,
-            address: address,
+            title: title,
+            userInformation: personalDetails,
+            userEducationDetails: education,
+            userWorkHistories: workHistory,
+            userAddress: address,
             skills: skills,
             languages: languages,
-            reference: reference
+            userReference: reference
         };
         let response = null;
         const requestObject = {
@@ -187,7 +239,7 @@ export const DataProvider = ({ children }) => {
             body: JSON.stringify(resume),
             headers: {'Content-Type': 'application/json',
                       'Authorization': sessionStorage.getItem('jwt')
-                    }
+                }
         }
         try{
             response = await fetch(RESUME_URL, requestObject);
@@ -244,10 +296,11 @@ export const DataProvider = ({ children }) => {
     }
     const [addEducationStatus, setAddEducationStatus] = useState(false);
     const [addReferenceStatus, setAddReferenceStatus] = useState(false);
+    const [isMounted, setIsMounted] = useState(false);
     return (
         <DataContext.Provider value={{
             Navigate, addDetails, education, setEducation, newEducationDetails, setNewEducationDetails, 
-            newWorkHistory, setNewWorkHistory, addSkill, addLanguage, newSkill, setNewSkill, newLanguage, setNewLanguage, skills, setSkills, languages, setLanguages,reference, setReference, newReference, setNewReference, addReferee, personalDetails, setPersonalDetails, resume, setResume, onCreateFinish,showCvLink, setShowCvLink, showResumeLink, setShowResumeLink, showCoverLetterLink, setShowCoverLetterLink, onResumeButtonClick, onCoverLetterButtonClick, onCvButtonClick, setDropDownFalse, editResume, setEditResume, editTitle, setEditTitle, editPersonalDetails, setEditPersonalDetails, editEducationStatus, setEditEducationStatus, editWorkStatus, setEditWorkStatus,editUserInformationStatus, setEditUserInformationStatus, editAddressStatus, setEditAddressStatus, editReferenceStatus, setEditReferenceStatus, updateEducation, updateWork, updateReference, deleteEducation, deleteWork, deleteReference, updateStatus, setAddWorkStatus, addWorkStatus, addEducationStatus, setAddEducationStatus, addReferenceStatus, setAddReferenceStatus
+            newWorkHistory, setNewWorkHistory, addSkill, addLanguage, newSkill, setNewSkill, newLanguage, setNewLanguage, skills, setSkills, languages, setLanguages,reference, setReference, newReference, setNewReference, addReferee, personalDetails, setPersonalDetails, resume, setResume, onCreateFinish,showCvLink, setShowCvLink, showResumeLink, setShowResumeLink, showCoverLetterLink, setShowCoverLetterLink, onResumeButtonClick, onCoverLetterButtonClick, onCvButtonClick, setDropDownFalse, editResume, setEditResume, editTitle, setEditTitle, editPersonalDetails, setEditPersonalDetails, editEducationStatus, setEditEducationStatus, editWorkStatus, setEditWorkStatus,editUserInformationStatus, setEditUserInformationStatus, editAddressStatus, setEditAddressStatus, editReferenceStatus, setEditReferenceStatus, updateEducation, updateWork, updateReference, deleteEducation, deleteWork, deleteReference, updateStatus, setAddWorkStatus, addWorkStatus, addEducationStatus, setAddEducationStatus, addReferenceStatus, setAddReferenceStatus, isMounted, setIsMounted, addWorkDetails, title, setTitle
         }}>
             {children}
         </DataContext.Provider>
