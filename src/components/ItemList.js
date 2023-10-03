@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { json, useNavigate } from "react-router-dom";
 import { FaEdit, FaTrash, FaEye, FaPen, FaDownload } from "react-icons/fa";
 import DownloadButton from "../buttons/DownloadButton";
@@ -8,7 +8,7 @@ import DeleteButton from "../buttons/DeleteButton";
 import DataContext from "../context/DataContext";
 
 const ItemList = ({item}) => {
-  const{setEditResume, editResume} = useContext(DataContext);
+  const{setEditResume, editResume, deleteResume} = useContext(DataContext);
   const Navigate = useNavigate();
   const editCurrentResume = () => {
     setEditResume({...editResume, ...item})
@@ -21,7 +21,7 @@ const ItemList = ({item}) => {
             <PreviewButton />
             <DownloadButton />
             <EditButton onClick={() => editCurrentResume()}/>
-            <DeleteButton />
+            <DeleteButton onClick={() => deleteResume(item.id)}/>
         </div>
     </div>
   </div>;

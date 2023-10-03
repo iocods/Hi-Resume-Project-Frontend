@@ -9,13 +9,14 @@ export const DataProvider = ({ children }) => {
     const [education, setEducation] = useState([]);
     const [workHistory, setWorkHistory] = useState([]);
     /** States and methods for Editing a Resume or Cv */
-    const[title, setTitle] = useState('');
-    const[editTitle, setEditTitle] = useState(false);
-    const[editEducationStatus, setEditEducationStatus] = useState([]);
-    const[editUserInformationStatus, setEditUserInformationStatus] = useState(false);
-    const[editWorkStatus, setEditWorkStatus] = useState([]);
-    const[editReferenceStatus, setEditReferenceStatus] = useState([]);
-    const[editAddressStatus, setEditAddressStatus] = useState(false);
+    const [title, setTitle] = useState('');
+    const [editTitle, setEditTitle] = useState(false);
+    const [editEducationStatus, setEditEducationStatus] = useState([]);
+    const [editUserInformationStatus, setEditUserInformationStatus] = useState(false);
+    const [editWorkStatus, setEditWorkStatus] = useState([]);
+    const [editReferenceStatus, setEditReferenceStatus] = useState([]);
+    const [editAddressStatus, setEditAddressStatus] = useState(false);
+    const [id, setId] = useState(0);
 
     const [newResume, setNewResume] = useState({})
 
@@ -256,6 +257,8 @@ export const DataProvider = ({ children }) => {
     }
     const updateResume = async () => {
         let response = null;
+        console.log(`${RESUME_URL}/${editResume.id}`);
+        const PATH = `${RESUME_URL}/${editResume.id}`;
         const requestObject = {
             method: 'PATCH',
             body: JSON.stringify(editResume),
@@ -264,8 +267,6 @@ export const DataProvider = ({ children }) => {
                 }
         }
         try{
-            console.log(`${RESUME_URL}/${editResume.id}`);
-            const PATH = `${RESUME_URL}/${editResume.id}`;
             response = await fetch(PATH, requestObject);
             if(!response.ok) throw Error("Invalid Username or Password");
             console.log(response);
@@ -275,6 +276,28 @@ export const DataProvider = ({ children }) => {
         }
         finally{
             console.log("Called the Update Enpoint");
+        }
+    }
+    const deleteResume = async (resumeId) => {
+        let response = null;
+        const requestObject = {
+            method: 'DELETE',
+            headers: {'Content-Type': 'application/json',
+                      'Authorization': sessionStorage.getItem('jwt')
+                }
+        }
+        try{
+            console.log(`${RESUME_URL}/${resumeId}`);
+            const PATH = `${RESUME_URL}/${resumeId}`;
+            response = await fetch(PATH, requestObject);
+            if(!response.ok) throw Error("Invalid Username or Password");
+            console.log(response);
+        }
+        catch(error){
+            console.log(error.message);
+        }
+        finally{
+            console.log("Called the Delete Enpoint");
         }
     }
     const updateEducation = (index) => {
@@ -323,7 +346,7 @@ export const DataProvider = ({ children }) => {
     return (
         <DataContext.Provider value={{
             Navigate, addDetails, education, setEducation, newEducationDetails, setNewEducationDetails, 
-            newWorkHistory, setNewWorkHistory, addSkill, addLanguage, newSkill, setNewSkill, newLanguage, setNewLanguage, skills, setSkills, languages, setLanguages,reference, setReference, newReference, setNewReference, addReferee, personalDetails, setPersonalDetails, resume, setResume, onCreateFinish,showCvLink, setShowCvLink, showResumeLink, setShowResumeLink, showCoverLetterLink, setShowCoverLetterLink, onResumeButtonClick, onCoverLetterButtonClick, onCvButtonClick, setDropDownFalse, editResume, setEditResume, editTitle, setEditTitle, editPersonalDetails, setEditPersonalDetails, editEducationStatus, setEditEducationStatus, editWorkStatus, setEditWorkStatus,editUserInformationStatus, setEditUserInformationStatus, editAddressStatus, setEditAddressStatus, editReferenceStatus, setEditReferenceStatus, updateEducation, updateWork, updateReference, deleteEducation, deleteWork, deleteReference, updateStatus, setAddWorkStatus, addWorkStatus, addEducationStatus, setAddEducationStatus, addReferenceStatus, setAddReferenceStatus, isMounted, setIsMounted, addWorkDetails, title, setTitle, updateResume
+            newWorkHistory, setNewWorkHistory, addSkill, addLanguage, newSkill, setNewSkill, newLanguage, setNewLanguage, skills, setSkills, languages, setLanguages,reference, setReference, newReference, setNewReference, addReferee, personalDetails, setPersonalDetails, resume, setResume, onCreateFinish,showCvLink, setShowCvLink, showResumeLink, setShowResumeLink, showCoverLetterLink, setShowCoverLetterLink, onResumeButtonClick, onCoverLetterButtonClick, onCvButtonClick, setDropDownFalse, editResume, setEditResume, editTitle, setEditTitle, editPersonalDetails, setEditPersonalDetails, editEducationStatus, setEditEducationStatus, editWorkStatus, setEditWorkStatus,editUserInformationStatus, setEditUserInformationStatus, editAddressStatus, setEditAddressStatus, editReferenceStatus, setEditReferenceStatus, updateEducation, updateWork, updateReference, deleteEducation, deleteWork, deleteReference, updateStatus, setAddWorkStatus, addWorkStatus, addEducationStatus, setAddEducationStatus, addReferenceStatus, setAddReferenceStatus, isMounted, setIsMounted, addWorkDetails, title, setTitle, updateResume, deleteResume, id, setId
         }}>
             {children}
         </DataContext.Provider>
