@@ -15,7 +15,7 @@ import AddReference from "../add-details/AddReference";
 import UpdateButton from "../buttons/UpdateButton";
 
 const EditResume = () => {
-    const{editResume, editTitle, setEditTitle, editEducationStatus, setEditEducationStatus, editWorkStatus, setEditWorkStatus, setEditUserInformationStatus, editUserInformationStatus, editAddressStatus, setEditAddressStatus, editReferenceStatus, setEditReferenceStatus, updateEducation, updateWork, updateReference, deleteEducation, deleteWork, deleteReference, updateStatus, addWorkStatus, setAddWorkStatus, addEducationStatus, setAddEducationStatus,addReferenceStatus, setAddReferenceStatus} = useContext(DataContext);
+    const{editResume, editTitle, setEditTitle, editEducationStatus, setEditEducationStatus, editWorkStatus, setEditWorkStatus, setEditUserInformationStatus, editUserInformationStatus, editAddressStatus, setEditAddressStatus, editReferenceStatus, setEditReferenceStatus, updateEducation, updateWork, updateReference, deleteEducation, deleteWork, deleteReference, updateStatus, addWorkStatus, setAddWorkStatus, addEducationStatus, setAddEducationStatus,addReferenceStatus, setAddReferenceStatus, updateResume} = useContext(DataContext);
     
     useEffect(() => {
         console.log("Reloading from useEffect hook");
@@ -111,7 +111,7 @@ const EditResume = () => {
                 <EditReference key={index} index={index}/> 
             )}
         </div>
-        <UpdateButton text={"Resume"} />
+        <UpdateButton text={"Resume"} onClick={() => updateResume()}/>
     </section>
     <section></section>
   </section>;

@@ -254,6 +254,29 @@ export const DataProvider = ({ children }) => {
             Navigate(`/`, {replace: true});
         }
     }
+    const updateResume = async () => {
+        let response = null;
+        const requestObject = {
+            method: 'PATCH',
+            body: JSON.stringify(editResume),
+            headers: {'Content-Type': 'application/json',
+                      'Authorization': sessionStorage.getItem('jwt')
+                }
+        }
+        try{
+            console.log(`${RESUME_URL}/${editResume.id}`);
+            const PATH = `${RESUME_URL}/${editResume.id}`;
+            response = await fetch(PATH, requestObject);
+            if(!response.ok) throw Error("Invalid Username or Password");
+            console.log(response);
+        }
+        catch(error){
+            console.log(error.message);
+        }
+        finally{
+            console.log("Called the Update Enpoint");
+        }
+    }
     const updateEducation = (index) => {
         setEditEducationStatus(editEducationStatus.map((stats, position) => (position === index) ? true : false));
     }
@@ -300,7 +323,7 @@ export const DataProvider = ({ children }) => {
     return (
         <DataContext.Provider value={{
             Navigate, addDetails, education, setEducation, newEducationDetails, setNewEducationDetails, 
-            newWorkHistory, setNewWorkHistory, addSkill, addLanguage, newSkill, setNewSkill, newLanguage, setNewLanguage, skills, setSkills, languages, setLanguages,reference, setReference, newReference, setNewReference, addReferee, personalDetails, setPersonalDetails, resume, setResume, onCreateFinish,showCvLink, setShowCvLink, showResumeLink, setShowResumeLink, showCoverLetterLink, setShowCoverLetterLink, onResumeButtonClick, onCoverLetterButtonClick, onCvButtonClick, setDropDownFalse, editResume, setEditResume, editTitle, setEditTitle, editPersonalDetails, setEditPersonalDetails, editEducationStatus, setEditEducationStatus, editWorkStatus, setEditWorkStatus,editUserInformationStatus, setEditUserInformationStatus, editAddressStatus, setEditAddressStatus, editReferenceStatus, setEditReferenceStatus, updateEducation, updateWork, updateReference, deleteEducation, deleteWork, deleteReference, updateStatus, setAddWorkStatus, addWorkStatus, addEducationStatus, setAddEducationStatus, addReferenceStatus, setAddReferenceStatus, isMounted, setIsMounted, addWorkDetails, title, setTitle
+            newWorkHistory, setNewWorkHistory, addSkill, addLanguage, newSkill, setNewSkill, newLanguage, setNewLanguage, skills, setSkills, languages, setLanguages,reference, setReference, newReference, setNewReference, addReferee, personalDetails, setPersonalDetails, resume, setResume, onCreateFinish,showCvLink, setShowCvLink, showResumeLink, setShowResumeLink, showCoverLetterLink, setShowCoverLetterLink, onResumeButtonClick, onCoverLetterButtonClick, onCvButtonClick, setDropDownFalse, editResume, setEditResume, editTitle, setEditTitle, editPersonalDetails, setEditPersonalDetails, editEducationStatus, setEditEducationStatus, editWorkStatus, setEditWorkStatus,editUserInformationStatus, setEditUserInformationStatus, editAddressStatus, setEditAddressStatus, editReferenceStatus, setEditReferenceStatus, updateEducation, updateWork, updateReference, deleteEducation, deleteWork, deleteReference, updateStatus, setAddWorkStatus, addWorkStatus, addEducationStatus, setAddEducationStatus, addReferenceStatus, setAddReferenceStatus, isMounted, setIsMounted, addWorkDetails, title, setTitle, updateResume
         }}>
             {children}
         </DataContext.Provider>
